@@ -1,0 +1,124 @@
+/* ============================================================
+   Modo Daltonico - Filtros SVG y estilos accesibles
+   ============================================================ */
+
+/* --- Filtros SVG inyectados via CSS (hidden) --- */
+
+/* --- Botón flotante --- */
+.md-toggle {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 10000;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 6px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.md-toggle__btn {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 2px solid #555;
+	background: #fff;
+	color: #333;
+	font-size: 22px;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s, border-color 0.2s;
+	line-height: 1;
+}
+
+.md-toggle__btn:hover {
+	background: #e8e8e8;
+}
+
+.md-toggle__btn:focus {
+	outline: 2px solid #005fcc;
+	outline-offset: 2px;
+}
+
+.md-toggle__btn[aria-pressed="true"] {
+	background: #005fcc;
+	border-color: #003d99;
+	color: #fff;
+}
+
+/* --- Selector de tipo de contraste --- */
+.md-toggle__select-wrapper {
+	display: none;
+}
+
+.md-toggle[data-active="true"] .md-toggle__select-wrapper {
+	display: block;
+}
+
+.md-toggle__select {
+	padding: 4px 8px;
+	font-size: 13px;
+	border: 1px solid #999;
+	border-radius: 4px;
+	background: #fff;
+	color: #333;
+	cursor: pointer;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.md-toggle__select:focus {
+	outline: 2px solid #005fcc;
+	outline-offset: 2px;
+}
+
+/* --- Badge indicador de modo activo --- */
+.md-badge {
+	display: none;
+	position: fixed;
+	top: 8px;
+	right: 8px;
+	z-index: 10001;
+	padding: 4px 12px;
+	border-radius: 12px;
+	font-size: 12px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #fff;
+	background: #005fcc;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	pointer-events: none;
+}
+
+.md-badge--visible {
+	display: block;
+}
+
+/* ============================================================
+   Filtros de daltonismo via CSS filter
+   Se aplican a <html> para cubrir toda la página sin modificar
+   directamente los colores de los elementos individuales.
+   ============================================================ */
+
+/* --- SVG filters (inline hidden) are injected by JS --- */
+
+html.md-protanopia {
+	filter: url(#md-filter-protanopia);
+}
+
+html.md-deuteranopia {
+	filter: url(#md-filter-deuteranopia);
+}
+
+html.md-tritanopia {
+	filter: url(#md-filter-tritanopia);
+}
+
+/* Evitar que el filtro afecte al botón flotante y al badge */
+.md-toggle,
+.md-badge {
+	filter: none;
+	isolation: isolate;
+}
